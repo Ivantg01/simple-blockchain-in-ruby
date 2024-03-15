@@ -1,35 +1,40 @@
-def get_transactions_data
+def get_transactions_data (round)
 
 	transactions_block ||= []
-	blank_transaction = Hash[from: "", to: "",
-													 what: "", qty: ""]
+
 	loop do
 		puts "" 
-		puts "Enter your name for the new transaction"
-		from = gets.chomp
-		puts "" 
-		puts "What do you want to send ?"
-		what = gets.chomp
-		puts "" 
-		puts "How much quantity ?"
-		qty  = gets.chomp
-		puts "" 
-		puts "Who do you want to send it to ?"
-		to 	 = gets.chomp
+		puts "Enter movement #{round}:"
+		move = gets.chomp
 
-		transaction = Hash[from: "#{from}", to: "#{to}", 
-											 what: "#{what}", qty: "#{qty}"]
+		transaction = Hash[round: "#{round}", move: "#{move}"]
 		transactions_block << transaction
 
 		puts "" 
-		puts "Do you want to make another transaction for this block ? (Y/n)"
-		new_transaction = gets.chomp.downcase
-
-		if new_transaction == "y"
-			self
-		else
-			return transactions_block
-			break
-		end
+		return transactions_block
 	end
+end
+
+def get_first_block_data
+	transactions_block ||= []
+	puts "" 
+	puts "Enter your name for the event"
+	event = gets.chomp
+	puts "" 
+	puts "Enter the date"
+	date = gets.chomp
+	puts "" 
+	puts "Enter white player name:"
+	white  = gets.chomp
+	puts "" 
+	puts "Enter black player name:"
+	black = gets.chomp
+	puts "" 
+	puts "Enter the result:"
+	result = gets.chomp
+
+	transaction = Hash[event: "#{event}", date: "#{date}", white: "#{white}", black: "#{black}",
+			round: "-", result: "#{result}"]
+	transactions_block << transaction
+	return transactions_block
 end
