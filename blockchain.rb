@@ -39,10 +39,7 @@ LEDGER = []
 def create_first_block
 	i = 0
 	instance_variable_set( "@b#{i}", 
-												 Block.first( 
-													{ from: "Dutchgrown", to: "Vincent", what: "Tulip Bloemendaal Sunset", qty: 10 },
-													{ from: "Keukenhof", to: "Anne", what: "Tulip Semper Augustus", qty: 7 } )
-											 )
+		Block.first( get_first_block_data ) )
 	LEDGER << @b0
 	pp @b0
 	p "============================"
@@ -54,7 +51,8 @@ end
 def add_block
 	i = 1
 	loop do
-		instance_variable_set("@b#{i}", Block.next( (instance_variable_get("@b#{i-1}")), get_transactions_data))
+		instance_variable_set("@b#{i}", Block.next( (instance_variable_get("@b#{i-1}")),
+			get_transactions_data(i)))
 		LEDGER << instance_variable_get("@b#{i}")
 		p "============================"
 		pp instance_variable_get("@b#{i}")
@@ -70,7 +68,7 @@ def launcher
 	puts ""
 	sleep 1.5
 	puts "This program was created by Anthony Amar for and educationnal purpose"
-	puts ""
+	puts "Modified to store chess matches"
 	sleep 1.5
 	puts "Wait for the genesis (the first block of the blockchain)"
 	puts ""
